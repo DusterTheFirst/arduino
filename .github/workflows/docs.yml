@@ -1,0 +1,32 @@
+name: Documentation
+on: push
+
+jobs:
+  copy-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+            toolchain: nightly
+            target: thumbv7em-none-eabihf
+            default: true
+            components: rustfmt, clippy
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features
+      - uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --release --all-features
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: target/thumbv7em-none-eabihf/doc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
