@@ -22,7 +22,8 @@ jobs:
         with:
           command: doc
           args: --release --all-features
-      - run: ls -la target
+      - run: echo "teensyduino-rs.dusterthefirst.com" > target/thumbv7em-none-eabihf/doc/CNAME
+      - run: echo "<meta http-equiv="refresh" content="0; url=https://teensyduino-rs.dusterthefirst.com/teensyduino" />" > target/thumbv7em-none-eabihf/doc/index.html
       - name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2

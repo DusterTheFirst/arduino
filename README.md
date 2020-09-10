@@ -1,2 +1,2 @@
-# `arduino`
-Functions from the arduino framework, re-exported and wrapped in rusty, safe wrappers.
+# `teensyduino-rs`
+Functions from the teensyduino library, re-exported and wrapped in rusty, safe wrappers.
