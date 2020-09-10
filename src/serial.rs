@@ -136,9 +136,10 @@ impl Serial {
     pub fn stop_bits() -> u8 {
         let b: u8 = unsafe { usb_cdc_line_coding[1].to_be_bytes()[0] };
         if b == 0 {
-            return 1;
+            1
+        } else {
+            b
         }
-        return b;
     }
 
     /// Get the parity type used in the serial transmission

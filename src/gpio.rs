@@ -135,7 +135,7 @@ impl Pin {
             fn digitalToggle(pin: u8);
         }
 
-        unsafe { digitalToggle(self.0.into()) }
+        unsafe { digitalToggle(self.0) }
     }
 
     /// Write a HIGH (true) or a LOW (false) value to a digital pin.
