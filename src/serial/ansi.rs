@@ -94,7 +94,7 @@ impl<'a> EscapeSequence<'a> {
     }
 }
 
-#[cfg(feature = "no_color")]
+#[cfg(not(feature = "no_color"))]
 impl<'a> Display for EscapeSequence<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         f.write_str(ANSI_ESCAPE)?;
@@ -171,7 +171,7 @@ impl<'a> Display for EscapeSequence<'a> {
     }
 }
 
-#[cfg(not(feature = "no_color"))]
+#[cfg(feature = "no_color")]
 impl Display for EscapeSequence<'_> {
     fn fmt(&self, _: &mut Formatter<'_>) -> fmt::Result {
         Ok(())
