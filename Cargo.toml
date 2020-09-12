@@ -3,11 +3,21 @@ name = "teensyduino"
 version = "0.1.0"
 authors = ["DusterTheFirst <14093962+DusterTheFirst@users.noreply.github.com>"]
 edition = "2018"
-
-description = "Functions from the arduino framework, re-exported and wrapped in rusty, safe wrappers"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Functions from the teensyduino library, re-exported and wrapped in rusty, safe wrappers"
 
 [dependencies]
-compiler_builtins = { version = "*", features = ["mangled-names"] }
+log = { version = "0.4.11", optional = true }
 unsafe_fn = "0.1.2"
+
+[features]
+default = ["usb_logging", "led"]
+
+# Setup a log implementation for the usb Serial port
+usb_logging = ["log"]
+
+# Disable the coloring on the output of the logging implementation.
+# Useful when your serial terminal does not support ansi escape sequences
+no_color = []
+
+# Enable the LED_BUILTIN constant (for boards that support it)
+led = []
