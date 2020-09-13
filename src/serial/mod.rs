@@ -1,7 +1,6 @@
 //! Tooling for accessing the Serial and UART ports on the uC
 
 use core::{
-    cell::Cell,
     convert::TryInto,
     ffi::c_void,
     fmt::{self, Write},
@@ -64,9 +63,13 @@ impl From<u8> for Parity {
     }
 }
 
+/// A serial USB connection to a host device. Based off of the Arduino Serial class.
+/// Do not create an instance of this, instad use the provided SERIAL static
+///
+/// # See Also
+/// - [Serial - Arduino Reference](https://www.arduino.cc/reference/en/language/functions/communication/serial/)
+/// - [Teensy Serial Reference](https://www.pjrc.com/teensy/td_serial.html)
 pub type SERIAL = USBSerial;
-
-static SERIAL_TIMEOUT: AtomicU32 = AtomicU32::new(1000);
 
 /// A serial USB connection to a host device. Based off of the Arduino Serial class.
 /// Do not create an instance of this, instad use the provided SERIAL static
@@ -75,7 +78,11 @@ static SERIAL_TIMEOUT: AtomicU32 = AtomicU32::new(1000);
 /// - [Serial - Arduino Reference](https://www.arduino.cc/reference/en/language/functions/communication/serial/)
 /// - [Teensy Serial Reference](https://www.pjrc.com/teensy/td_serial.html)
 pub struct USBSerial {}
+
+static SERIAL_TIMEOUT: AtomicU32 = AtomicU32::new(1000);
+
 impl USBSerial {
+    /// Set the serial read in timeout
     pub fn set_timeout(timeout: u32) {
         SERIAL_TIMEOUT.store(timeout, Ordering::Relaxed);
     }
@@ -185,7 +192,7 @@ impl USBSerial {
         unsafe { usb_cdc_line_rtsdtr & USB_SERIAL_RTS != 0 }
     }
 
-    // FIXME: document
+    /// Read in the bytes from a serial buffer for the duration of the timeout, or until the buffer is full
     pub fn read_bytes_timeout(buffer: &mut [u8]) -> usize {
         // The current count of read in bytes
         let mut count = 0usize;
@@ -196,8 +203,7 @@ impl USBSerial {
 
         loop {
             // Increment the read in bytes by the amount that had been filled into the buffer
-            count +=
-                unsafe { usb_serial_read(buffer.as_ptr().offset(count as _) as _, length - count) };
+            count += unsafe { usb_serial_read(buffer.as_ptr().add(count) as _, length - count) };
 
             // Break the loop if the buffer is full
             if count >= length {
@@ -211,7 +217,7 @@ impl USBSerial {
         }
     }
 
-    // FIXME: document
+    /// Read in the bytes from the serial buffer in one shot without a timeout
     pub fn read_bytes(buffer: &mut [u8]) -> usize {
         // Calculate the avaliable bytes to read in by taking the minimum of
         // the bytes in the serial buffer and in the provided buffer
@@ -220,6 +226,8 @@ impl USBSerial {
         unsafe { usb_serial_read(buffer.as_mut_ptr() as _, avaliable_bytes) }
     }
 
+    /// Read in a string from the usb buffer with retrying to fill the buffer all the way
+    /// (max 256 bytes)
     pub fn read_str_timeout() -> Result<Option<&'static str>, Utf8Error> {
         static mut BUFFER: [u8; 256] = [0; 256];
 
@@ -228,10 +236,11 @@ impl USBSerial {
         if read_in == 0 {
             Ok(None)
         } else {
-            str::from_utf8(unsafe { &BUFFER[..read_in] }).map(|s| Some(s))
+            str::from_utf8(unsafe { &BUFFER[..read_in] }).map(Some)
         }
     }
 
+    /// Read in a string from the usb buffer without retrying to fill the buffer all the way (max 256 bytes)
     pub fn read_str() -> Result<Option<&'static str>, Utf8Error> {
         static mut BUFFER: [u8; 256] = [0; 256];
 
@@ -240,7 +249,7 @@ impl USBSerial {
         if read_in == 0 {
             Ok(None)
         } else {
-            str::from_utf8(unsafe { &BUFFER[..read_in] }).map(|s| Some(s))
+            str::from_utf8(unsafe { &BUFFER[..read_in] }).map(Some)
         }
     }
 
@@ -277,6 +286,7 @@ impl USBSerial {
     }
 }
 
+/// A ZST that can be constructed to use the write! and writeln! macros with the global SERIAL output
 pub struct USBSerialWriter;
 
 impl Write for USBSerialWriter {

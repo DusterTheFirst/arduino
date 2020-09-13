@@ -1,3 +1,5 @@
+//! Tools for working with ansi escape sequences, mainly in serial terminals
+
 use core::fmt::{self, Display, Formatter};
 
 const ANSI_ESCAPE: &str = "\u{1B}[";
@@ -39,26 +41,9 @@ pub enum Style {
     Strikethrough,
 }
 
-pub const fn fg(color: Color) -> EscapeSequence<'static> {
-    EscapeSequence::new().set_fg(color)
-}
-
-pub const fn bg(color: Color) -> EscapeSequence<'static> {
-    EscapeSequence::new().set_bg(color)
-}
-
-pub const fn fg_bg(fg: Color, bg: Color) -> EscapeSequence<'static> {
-    EscapeSequence::new().set_fg(fg).set_bg(bg)
-}
-
-pub const fn styles<'a>(styles: &'a [Style]) -> EscapeSequence<'a> {
-    EscapeSequence::new().set_styles(styles)
-}
-
-pub const fn clear() -> EscapeSequence<'static> {
-    EscapeSequence::new().set_styles(&[Style::Clear])
-}
-
+/// A structure defining an ansi escape sequence. To convert
+/// the structure to its string representation, use the
+/// Display implementation
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub struct EscapeSequence<'a> {
     fg: Option<Color>,
@@ -67,6 +52,7 @@ pub struct EscapeSequence<'a> {
 }
 
 impl<'a> EscapeSequence<'a> {
+    /// Create a new escape sequence with no information
     pub const fn new() -> Self {
         Self {
             bg: None,
@@ -75,6 +61,7 @@ impl<'a> EscapeSequence<'a> {
         }
     }
 
+    /// Set the foreground in the escape sequence
     pub const fn set_fg(self, color: Color) -> Self {
         EscapeSequence {
             fg: Some(color),
@@ -82,6 +69,7 @@ impl<'a> EscapeSequence<'a> {
         }
     }
 
+    /// Set the background for the escape sequence
     pub const fn set_bg(self, color: Color) -> Self {
         EscapeSequence {
             bg: Some(color),
@@ -89,6 +77,7 @@ impl<'a> EscapeSequence<'a> {
         }
     }
 
+    /// Set the styles in the escape sequence
     pub const fn set_styles(self, styles: &'a [Style]) -> Self {
         EscapeSequence { styles, ..self }
     }

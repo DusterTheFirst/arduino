@@ -2,6 +2,7 @@
 //! * Requires
 
 use super::{ansi, ansi::Color, USBSerialWriter, SERIAL};
+use ansi::{EscapeSequence, Style};
 use core::fmt::Write;
 use log::{Level, LevelFilter, Log, Metadata, Record, SetLoggerError};
 
@@ -39,6 +40,7 @@ impl Default for LoggingConfig {
     }
 }
 
+/// A logger for use with the log crate that outputs its data out over serial
 pub struct USBLogger {
     enabled: bool,
     filters: &'static [(&'static str, Option<LevelFilter>)],
@@ -54,6 +56,7 @@ impl USBLogger {
         }
     }
 
+    /// Initialize the USBLogger for use with the log crate
     pub fn init(config: LoggingConfig) -> Result<(), SetLoggerError> {
         unsafe {
             LOGGER.enabled = true;
@@ -105,9 +108,9 @@ impl Log for USBLogger {
             writeln!(
                 USBSerialWriter {},
                 "[{}{}{} {}]: {}\r",
-                ansi::fg(level_color),
+                EscapeSequence::new().set_fg(level_color),
                 level,
-                ansi::clear(),
+                EscapeSequence::new().set_styles(&[Style::Clear]),
                 record.target(),
                 record.args()
             )

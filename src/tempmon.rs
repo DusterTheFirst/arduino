@@ -1,3 +1,5 @@
+//! Utilities for interfacing with the teensy 4's integrated temperature monitor
+
 extern "C" {
     fn tempmonGetTemp() -> f32;
 }
