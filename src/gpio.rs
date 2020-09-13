@@ -205,10 +205,11 @@ impl Into<u8> for &Pin {
 }
 
 /// The builtin LED, normally on pin 13
+/// 
+/// **Requires the feature `led`**
 ///
 /// # Safety
 /// On boards with the led not on pin 13, this will not work,
 /// and could cause undefined behavior
 #[cfg(feature = "led")]
-#[doc(cfg(led))]
 pub const LED_BUILTIN: Pin = unsafe { Pin::new(13) };

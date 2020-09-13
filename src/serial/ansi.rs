@@ -1,4 +1,6 @@
 //! Tools for working with ansi escape sequences, mainly in serial terminals
+//! 
+//! **Requires the feature `ansi`**
 
 use core::fmt::{self, Display, Formatter};
 

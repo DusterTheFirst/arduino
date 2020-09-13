@@ -12,11 +12,9 @@ use core::{
 use crate::millis;
 
 #[cfg(feature = "usb_logging")]
-#[doc(cfg(usb_logging))]
 pub mod log;
 
-#[cfg(feature = "usb_logging")]
-#[doc(cfg(usb_logging))]
+#[cfg(feature = "ansi")]
 pub mod ansi;
 
 extern "C" {

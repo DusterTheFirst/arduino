@@ -6,14 +6,19 @@ edition = "2018"
 description = "Functions from the teensyduino library, re-exported and wrapped in rusty, safe wrappers"
 
 [dependencies]
-log = { version = "0.4.11", optional = true }
+log = { version = "0.4", optional = true }
 unsafe_fn = "0.1.2"
 
 [features]
 default = ["usb_logging", "led"]
 
 # Setup a log implementation for the usb Serial port
-usb_logging = ["log"]
+usb_logging = ["log", "ansi"]
+
+# Enable the ansi escape code utils. Used in the log implementation
+# These ansi escape codes can be disabled at compile time with the
+# no_color feature flag
+ansi = []
 
 # Disable the coloring on the output of the logging implementation.
 # Useful when your serial terminal does not support ansi escape sequences

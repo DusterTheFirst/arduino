@@ -1,5 +1,8 @@
 //! An implementation for using the log library to log over serial
-//! * Requires
+//!
+//! **Requires the feature `usb_logging`**
+
+use crate::millis;
 
 use super::{ansi, ansi::Color, USBSerialWriter, SERIAL};
 use ansi::{EscapeSequence, Style};
@@ -62,7 +65,7 @@ impl USBLogger {
             LOGGER.enabled = true;
             LOGGER.filters = config.filters;
 
-            log::set_logger(&LOGGER).map(|()| log::set_max_level(LevelFilter::Info))
+            log::set_logger(&LOGGER).map(|()| log::set_max_level(config.max_level))
         }
     }
 
@@ -107,11 +110,12 @@ impl Log for USBLogger {
             // FIXME: remove carriage return
             writeln!(
                 USBSerialWriter {},
-                "[{}{}{} {}]: {}\r",
+                "[{}{}{} {} {}]: {}\r",
                 EscapeSequence::new().set_fg(level_color),
                 level,
                 EscapeSequence::new().set_styles(&[Style::Clear]),
                 record.target(),
+                millis(),
                 record.args()
             )
             .ok(); //FIXME: UNWRAP

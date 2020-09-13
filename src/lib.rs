@@ -2,7 +2,6 @@
 //! in rusty, safe wrappers.
 
 #![no_std]
-#![feature(doc_cfg)]
 #![warn(missing_docs, missing_crate_level_docs)]
 
 #[macro_use]
