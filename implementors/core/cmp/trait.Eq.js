@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["log"] = [{"text":"impl Eq for Level","synthetic":false,"types":[]},{"text":"impl Eq for LevelFilter","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; Eq for Metadata&lt;'a&gt;","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; Eq for MetadataBuilder&lt;'a&gt;","synthetic":false,"types":[]}];
+implementors["teensyduino"] = [{"text":"impl Eq for Color","synthetic":false,"types":[]},{"text":"impl Eq for Style","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; Eq for EscapeSequence&lt;'a&gt;","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

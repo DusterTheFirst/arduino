@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["LED_BUILTIN","The builtin LED, normally on pin 13"]],"enum":[["PinMode","The modes that a pin can be configured in"]],"struct":[["Pin","A container for a pin number that has been verified to exist This method was chosen to limit the use of unsafe when dealing with pins"]]});

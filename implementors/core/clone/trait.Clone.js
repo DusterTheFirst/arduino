@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["log"] = [{"text":"impl Clone for Level","synthetic":false,"types":[]},{"text":"impl Clone for LevelFilter","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; Clone for Record&lt;'a&gt;","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; Clone for Metadata&lt;'a&gt;","synthetic":false,"types":[]}];
+implementors["teensyduino"] = [{"text":"impl Clone for Color","synthetic":false,"types":[]},{"text":"impl Clone for Style","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; Clone for EscapeSequence&lt;'a&gt;","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Tone","Allow a pin to output square wave notes asynchronously using the IntervalTimer behind the scenes."]]});

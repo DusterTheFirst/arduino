@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Color",""],["Style",""]],"struct":[["EscapeSequence","A structure defining an ansi escape sequence. To convert the structure to its string representation, use the Display implementation"]]});

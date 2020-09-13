@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["log"] = [{"text":"impl&lt;'a&gt; StructuralPartialEq for Metadata&lt;'a&gt;","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; StructuralPartialEq for MetadataBuilder&lt;'a&gt;","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for ParseLevelError","synthetic":false,"types":[]}];
+implementors["teensyduino"] = [{"text":"impl StructuralPartialEq for Color","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Style","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; StructuralPartialEq for EscapeSequence&lt;'a&gt;","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

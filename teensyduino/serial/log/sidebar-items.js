@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["LoggingConfig","Logging configuration"],["USBLogger","A logger for use with the log crate that outputs its data out over serial"]]});

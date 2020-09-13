@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `Tone` trait in crate `teensyduino`."><meta name="keywords" content="rust, rustlang, rust-lang, Tone"><title>teensyduino::sound::Tone - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc trait"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../teensyduino/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><p class='location'>Trait Tone</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.no_tone">no_tone</a><a href="#tymethod.tone">tone</a><a href="#tymethod.tone_with_duration">tone_with_duration</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>teensyduino</a>::<wbr><a href='index.html'>sound</a></p><script>window.sidebarCurrent = {name: 'Tone', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../../src/teensyduino/sound.rs.html#9-59' title='goto source code'>[src]</a></span><span class='in-band'>Trait <a href='../index.html'>teensyduino</a>::<wbr><a href='index.html'>sound</a>::<wbr><a class="trait" href=''>Tone</a></span></h1><div class="docblock type-decl hidden-by-usual-hider"><pre class='rust trait'>pub trait Tone {
+    fn <a href='#tymethod.tone' class='fnname'>tone</a>(&amp;self, frequency: u16);
+<div class='item-spacer'></div>    fn <a href='#tymethod.tone_with_duration' class='fnname'>tone_with_duration</a>(&amp;self, frequency: u16, duration: u64);
+<div class='item-spacer'></div>    fn <a href='#tymethod.no_tone' class='fnname'>no_tone</a>(&amp;self);
+}</pre></div><div class='docblock'><p>Allow a pin to output square wave notes asynchronously using the IntervalTimer behind the scenes.</p>
+<h1 id="see-also" class="section-header"><a href="#see-also">See Also</a></h1>
+<ul>
+<li><a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/">tone() - Arduino Reference</a></li>
+<li><a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/notone/">noTone() - Arduino Reference</a></li>
+</ul>
+</div><h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.tone' class='method'><code>fn <a href='#tymethod.tone' class='fnname'>tone</a>(&amp;self, frequency: u16)</code></h3><div class='docblock'><p>Generates a square wave of the specified frequency (and 50% duty cycle) on a pin.
+A duration can be specified, otherwise the wave continues until a call to noTone().
+The pin can be connected to a piezo buzzer or other speaker to play tones.</p>
+<p>Only one tone can be generated at a time. If a tone is already playing on a different
+pin, the call to tone() will have no effect. If the tone is playing on the same pin,
+the call will set its frequency.</p>
+<p>Use of the tone() function will interfere with PWM output on pins 3 and 11
+(on boards other than the Mega). It is not possible to generate tones lower than 31Hz.
+For technical details, see Brett Hagman’s notes.</p>
+<h1 id="notes-and-warnings" class="section-header"><a href="#notes-and-warnings">Notes and Warnings</a></h1>
+<p>If you want to play different pitches on multiple pins, you need to call noTone() on one
+pin before calling tone() on the next pin.</p>
+<h1 id="see-also-1" class="section-header"><a href="#see-also-1">See Also</a></h1>
+<ul>
+<li><a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/">tone() - Arduino Reference</a></li>
+</ul>
+</div><h3 id='tymethod.tone_with_duration' class='method'><code>fn <a href='#tymethod.tone_with_duration' class='fnname'>tone_with_duration</a>(&amp;self, frequency: u16, duration: u64)</code></h3><div class='docblock'><p>Generates a square wave of the specified frequency (and 50% duty cycle) on a pin.
+A duration can be specified, otherwise the wave continues until a call to noTone().
+The pin can be connected to a piezo buzzer or other speaker to play tones.</p>
+<p>Only one tone can be generated at a time. If a tone is already playing on a different
+pin, the call to tone() will have no effect. If the tone is playing on the same pin,
+the call will set its frequency.</p>
+<p>Use of the tone() function will interfere with PWM output on pins 3 and 11
+(on boards other than the Mega). It is not possible to generate tones lower than 31Hz.
+For technical details, see Brett Hagman’s notes.</p>
+<h1 id="notes-and-warnings-1" class="section-header"><a href="#notes-and-warnings-1">Notes and Warnings</a></h1>
+<p>If you want to play different pitches on multiple pins, you need to call noTone() on one
+pin before calling tone() on the next pin.</p>
+<h1 id="see-also-2" class="section-header"><a href="#see-also-2">See Also</a></h1>
+<ul>
+<li><a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/">tone() - Arduino Reference</a></li>
+</ul>
+</div><h3 id='tymethod.no_tone' class='method'><code>fn <a href='#tymethod.no_tone' class='fnname'>no_tone</a>(&amp;self)</code></h3><div class='docblock'><p>Stops the generation of a square wave triggered by tone(). Has no effect if no tone is being generated.</p>
+<h1 id="notes-and-warnings-2" class="section-header"><a href="#notes-and-warnings-2">Notes and Warnings</a></h1>
+<p>If you want to play different pitches on multiple pins, you need to call noTone() on one
+pin before calling tone() on the next pin.</p>
+<h1 id="see-also-3" class="section-header"><a href="#see-also-3">See Also</a></h1>
+<ul>
+<li><a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/notone/">noTone() - Arduino Reference</a></li>
+</ul>
+</div></div><span class='loading-content'>Loading content...</span><h2 id='implementors' class='small-section-header'>Implementors<a href='#implementors' class='anchor'></a></h2><div class='item-list' id='implementors-list'><h3 id='impl-Tone' class='impl'><code class='in-band'>impl Tone for <a class="struct" href="../../teensyduino/gpio/struct.Pin.html" title="struct teensyduino::gpio::Pin">Pin</a></code><a href='#impl-Tone' class='anchor'></a><a class='srclink' href='../../src/teensyduino/sound.rs.html#66-78' title='goto source code'>[src]</a></h3><div class='impl-items'><h4 id='method.tone' class="method hidden"><code>fn <a href='#method.tone' class='fnname'>tone</a>(&amp;self, frequency: u16)</code><a class='srclink' href='../../src/teensyduino/sound.rs.html#67-69' title='goto source code'>[src]</a></h4><h4 id='method.tone_with_duration' class="method hidden"><code>fn <a href='#method.tone_with_duration' class='fnname'>tone_with_duration</a>(&amp;self, frequency: u16, duration: u64)</code><a class='srclink' href='../../src/teensyduino/sound.rs.html#71-73' title='goto source code'>[src]</a></h4><h4 id='method.no_tone' class="method hidden"><code>fn <a href='#method.no_tone' class='fnname'>no_tone</a>(&amp;self)</code><a class='srclink' href='../../src/teensyduino/sound.rs.html#75-77' title='goto source code'>[src]</a></h4></div></div><span class='loading-content'>Loading content...</span><script type="text/javascript" src="../../implementors/teensyduino/sound/trait.Tone.js" async></script></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "teensyduino";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>
